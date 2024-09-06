@@ -1,13 +1,12 @@
+
 import { sql } from './db.js'
 
 sql`
-  CREATE TABLE artigos (
-      id bigint PRIMARY KEY,
-      nome character varying(255),
-      descricao character varying(255),
-      conteudo text,
-      imagem character varying(255),
-      github character varying(255)
+  CREATE TABLE users (
+      id text PRIMARY KEY,
+      name character varying(255),
+      password character varying(255),
+      profile text
   );
 `.then(() => {
   console.log('tabela criada');
