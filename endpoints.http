@@ -20,9 +20,9 @@ PUT http://localhost:3333/doutores/id
 Content-Type: application/json
 
 {
-    "nome": "Doutor Carlos",
-    "password": "123",
-    "profile": "ADM"
+    "nome": "Doutor Luiz",
+    "idade": "34",
+    "areaFormacao": "Advocacia"
 }
 
 ###

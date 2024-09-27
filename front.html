@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Nome</p>
+    <input type="text" id="nome">
+    <p>Idade</p>
+    <input type="text" id="idade">
+    <p>Area Formação</p>
+    <input type="text" id="areaFormacao">
+
+    <button onclick="criarDoutores()">Cadastrar</button>
+
+    <p id="doutor"></p>
+
+    <script>
+
+        async function pegarDoutores(){
+            const resposta = await fetch('http://localhost:3333/doutores', {
+                method: 'GET'
+            });
+            const doutores = await resposta.json();
+            console.log(doutores);
+            const doutor = document.getElementById('doutor')
+            doutor.innerHTML = doutores[0].nome
+        }
+        pegarDoutores();
+
+        async function criarDoutores(){
+            const nome = document.getElementById('nome').value;
+            const idade = document.getElementById('idade').value;
+            const areaFormacao = document.getElementById('areaFormacao').value;
+
+            const doutor = {
+                "nome": nome,
+                "idade": idade,
+                "areaFormacao": areaFormacao
+            }
+            const resposta = await fetch('http://localhost:3333/doutores', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(doutor)
+            });
+
+            await pegarDoutores();
+        }
+
+
+
+    </script>
+</body>
+</html>
