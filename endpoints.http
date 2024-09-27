@@ -1,8 +1,30 @@
-POST http://localhost:3333/users
+#PARA UTILIZAR ESSES ENDPOINTS É NECESSÁRIO INSTALAR A EXTENSÃO DO VSCODE "REST CLIENT"
+###
+
+GET http://localhost:3333/doutores
+
+###
+
+POST http://localhost:3333/doutores
 Content-Type: application/json
 
 {
-  "name": "video curto",
-  "password": "121212",
-  "profile": "ADM"
+    "nome": "Doutor Carlos",
+    "idade": "54",
+    "areaFormacao": "Engenharia"
 }
+
+###
+
+PUT http://localhost:3333/doutores/id
+Content-Type: application/json
+
+{
+    "nome": "Doutor Carlos",
+    "password": "123",
+    "profile": "ADM"
+}
+
+###
+
+DELETE http://localhost:3333/doutores/id
