@@ -16,8 +16,24 @@ server.register(cors, {
 // CREATE
 server.post('/doutores', async (request, reply) => {
     const body = request.body;
-    await databasePostgres.createDoutores(body);
-    return reply.status(201).send();
+    let error = {};
+
+    if (!body.nome) {
+        error.nome = 'Faltou o Nome!'
+    }
+    if (!body.idade) {
+        error.idade = 'Faltou a Idade!'
+    }
+    if (!body.areaFormacao) {
+        error.areaFormacao = 'Faltou a Area de Formação!'
+    }
+
+    if (body.nome && body.idade && body.areaFormacao){
+        await databasePostgres.createDoutores(body);
+        return reply.status(201).send('Usuario Criado com Sucesso!');
+    } else {
+        return reply.status(400).send(error);
+    }
 })
 
 // READE
@@ -30,9 +46,27 @@ server.get('/doutores', async () => {
 server.put('/doutores/:id', async (request, reply) => {
     const doutoresID = request.params.id;
     const body = request.body;
-    await databasePostgres.updateUser(doutoresID, body);
+    let error = {};
 
-    return reply.status(204).send();
+    if (!body.nome) {
+        error.nome = 'Faltou o Nome!'
+    }
+    if (!body.idade) {
+        error.idade = 'Faltou a Idade!'
+    }
+    if (!body.areaFormacao) {
+        error.areaFormacao = 'Faltou a Area de Formação!'
+    }
+    if (!doutoresID) {
+        error.doutoresID = 'Faltou o ID do Doutor!'
+    }
+
+    if (body.nome && body.idade && body.areaFormacao && doutoresID){
+        await databasePostgres.updateUser(doutoresID, body);
+        return reply.status(204).send();
+    } else {
+        return reply.status(400).send(error);
+    }    
 })
 
 // DELETE
